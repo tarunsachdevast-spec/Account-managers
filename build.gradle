@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.tarun.hisabbook'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.tarun.hisabbook'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    // One fixed key, so every new build installs over the old one and keeps your data.
+    signingConfigs {
+        release {
+            storeFile file('../hisab-release.keystore')
+            storePassword 'hisabbook2026'
+            keyAlias 'hisab'
+            keyPassword 'hisabbook2026'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+        main {
+            // The app screens live in the www folder.
+            assets.srcDirs = ['../www']
+        }
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core:1.13.1'
+}
